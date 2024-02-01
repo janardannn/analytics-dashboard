@@ -50,27 +50,6 @@ def country_vs_intensity_data():
 # # print(data[0].keys())
 # print(country_vs_intensity_data())
 
-def topic_vs_relevance_data():
-    topic_vs_relevance = {}
-    for k in data:
-        if k["topic"] != "" and k["topic"] not in topic_vs_relevance.keys() and k["relevance"] != "":
-            topic_vs_relevance[k["topic"]] = []
-            topic_vs_relevance[k["topic"]].append(k["relevance"])
-        elif k["topic"] != "" and (k["relevance"] != "" and k["relevance"]!=None):
-            topic_vs_relevance[k["topic"]].append(k["relevance"])
-    
-    topic_relevance_avg = {}
-    for i in topic_vs_relevance.keys():
-        relevance_len = (len(topic_vs_relevance[i]))
-        relevance_sum = (sum(topic_vs_relevance[i]))
-
-        avg = relevance_sum/relevance_len
-        avg = ("{:.2f}".format(avg))
-
-        topic_relevance_avg[i] = avg
-    
-    return topic_relevance_avg
-
 # print(topic_vs_relevance_data())
 
 # def year_vs_sector_vs_intensity_data():
@@ -140,17 +119,48 @@ def region_vs_sector_data():
 
     return region_vs_sector_freq
 
+def topic_vs_relevance_data():
+    topic_vs_relevance = {}
+    for k in data:
+        if k["topic"] != "" and k["topic"] not in topic_vs_relevance.keys() and k["relevance"] != "":
+            topic_vs_relevance[k["topic"]] = []
+            topic_vs_relevance[k["topic"]].append(k["relevance"])
+        elif k["topic"] != "" and (k["relevance"] != "" and k["relevance"]!=None):
+            topic_vs_relevance[k["topic"]].append(k["relevance"])
+    
+    topic_relevance_avg = []
+    for i in topic_vs_relevance.keys():
+        relevance_len = (len(topic_vs_relevance[i]))
+        relevance_sum = (sum(topic_vs_relevance[i]))
+
+        avg = relevance_sum/relevance_len
+        avg = ("{:.2f}".format(avg))
+
+        topic_relevance_avg.append({
+            "topic":i,
+            "relevance": avg
+        })
+    
+    return topic_relevance_avg
+
+
 def topic_vs_likelihood_data():
     topic_vs_likelihood = x_vs_y("topic", "likelihood")
+
+    topic_vs_likelihood_final = []
     
     for k in topic_vs_likelihood.keys():
         avg = sum(topic_vs_likelihood[k])/len(topic_vs_likelihood[k])
 
         avg = ("{:.2f}".format(avg))
 
-        topic_vs_likelihood[k] = avg
+        topic_vs_likelihood_final.append({'topic': k,
+                                          'value': avg})
+        # print(k, avg)
 
-    return topic_vs_likelihood
+    return ( topic_vs_likelihood_final)
+
+topic_vs_likelihood_data()
 
 # print(region_vs_sector_data())
 # print(topic_vs_likelihood_data())
