@@ -19,5 +19,12 @@ def topic_vs_likelihood():
 def topic_vs_relevance():
     return data_analysis.topic_vs_relevance_data()
 
+@app.route('/sectorvsintensity', methods=['GET'])
+def sector_vs_intensity():
+    return data_analysis.sector_vs_intensity_data()
+
+@app.route('/regionvssector', methods=['GET'])
+def region_vs_sector():
+    return(data_analysis.region_vs_sector_data())
 
 app.run()

@@ -16,7 +16,7 @@ def sector_vs_intensity_data():
     
     sector_vs_intensity = x_vs_intensity("sector")
     # print(len(sector_vs_intensity.keys()))
-    sector_intensity_avg = {}
+    sector_intensity_avg = []
     # print(sector_vs_intensity["Energy"])
     for i in sector_vs_intensity.keys():
         intensity_len = (len(sector_vs_intensity[i]))
@@ -25,10 +25,12 @@ def sector_vs_intensity_data():
         avg = intensity_sum/intensity_len
         avg = ("{:.2f}".format(avg))
 
-        sector_intensity_avg[i] = avg
-    
+        # print(i, avg)
+        sector_intensity_avg.append({"sector":i,
+                                     "intensity": avg})
+    # print(sector_intensity_avg)
     return sector_intensity_avg
-
+sector_vs_intensity_data()
 
 def country_vs_intensity_data():
 
@@ -107,17 +109,39 @@ def country_vs_topic_data():
     return country_vs_topic_freq
 
 def region_vs_sector_data():
-    region_vs_sector = x_vs_y("country", "topic")
+    region_vs_sector = x_vs_y("region", "sector")
     
-    region_vs_sector_freq = {}
+    region_vs_sector_final = []
     
     for i in region_vs_sector.keys():
-        if i not in region_vs_sector_freq.keys():
-            region_vs_sector_freq[i] = dict(Counter(region_vs_sector[i]))
-        else:
-            region_vs_sector_freq[i] = dict(Counter(region_vs_sector[i]))
+        temp = []
+        temp_dict = dict(Counter(region_vs_sector[i]))
+        for k in temp_dict.keys():
+            temp.append({
+                "sector": k,
+                "intensity": temp_dict[k]
+            })
+            # print(temp_dict)
+        region_vs_sector_final.append({
+            "region": i,
+            "data": temp
+        })
+        # print(i, dict(Counter(region_vs_sector[i])))
+        # region_vs_sector_final.append({
+        #     "region" : i,
+        #     "data": {
+        #         dict((Counter(region_vs_sector[i])))
+        #     }
+        # })
+        # if i not in region_vs_sector_freq.keys():
+        #     region_vs_sector_freq[i] = dict(Counter(region_vs_sector[i]))
+        # else:
+        #     region_vs_sector_freq[i] = dict(Counter(region_vs_sector[i]))
 
-    return region_vs_sector_freq
+    return region_vs_sector_final
+
+# print(region_vs_sector_data()[0]['data'])
+
 
 def topic_vs_relevance_data():
     topic_vs_relevance = {}
