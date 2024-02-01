@@ -1,14 +1,17 @@
-import { useState, useEffect } from "react";
-import axios from "axios";
-import { API_URL } from "../App";
-import { PolarArea } from "react-chartjs-2";
+import { useState, useEffect } from "react"
+import axios from "axios"
+import Select from "react-select"
+import { API_URL } from "../App"
+import { randomColors } from "../App"
+import { Pie, PolarArea } from "react-chartjs-2"
 import Chart from "chart.js/auto"
 
-export default function SectorVsIntensity() {
+export default function RegionVsSector() {
     const [rawData, setRawData] = useState();
     const [chartData, setChartData] = useState();
 
-
+    const [selectOptions, setSelectOptions] = useState([])
+    const [current, setCurrent] = useState()
 
     useEffect(() => {
         const fetchData = async () => {
@@ -23,24 +26,47 @@ export default function SectorVsIntensity() {
 
     useEffect(() => {
         if (rawData) {
-            const randomColors = Array.from({ length: 97 }, () => `#${Math.floor(Math.random() * 16777215).toString(16)}`)
-            // console.log(rawData.map(data => data.sector))
+            // console.log()
+            setSelectOptions(rawData.map(data => data.region).map(data => ({ label: data, value: data })))
+            // console.log(rawData.map(data => data.region).map(data => ({ label: data, value: data }))[0])
+            setCurrent(rawData.map(data => data.region).map(data => ({ label: data, value: data }))[0])
+        }
+
+    }, [rawData])
+
+    useEffect(() => {
+        if (rawData && current) {
+
+            const data = rawData.filter(data => data.region === current.value)[0].data
+
+            // // console.log(rawData.map(data => data.sector))
+            // console.log(data.map(d => d.intensity))
 
             setChartData({
-                labels: rawData.map(data => data.sector),
+                labels: data.map(x => x.sector),
                 datasets: [{
-                    label: "Sector VS Intensity",
-                    data: rawData.map(data => data.intensity),
+                    label: "Region VS Sector vs Intensity",
+                    data: data.map(y => y.intensity),
                     // data: rawData.map(data => data.value)
                     backgroundColor: randomColors
                 }]
 
             })
-        }
 
-    }, [rawData])
+        }
+    }, [rawData, current])
+
+    // chartData ? console.log(chartData.labels) : ""
+    // chartData ? console.log(chartData.datasets[0].data) : ""
+
+    const handleSelectorChange = (e) => {
+        setCurrent(e)
+    }
 
     return (
-        chartData ? <PolarArea data={chartData} /> : <div />
+        <div>
+            <Select options={selectOptions} value={current} onChange={handleSelectorChange} />
+            {chartData ? <Pie data={chartData} /> : <div />}
+        </div>
     )
 }

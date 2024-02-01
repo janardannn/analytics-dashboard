@@ -29,8 +29,7 @@ export default function TopicVsRelevance() {
             //     y: values[index],
             //     r: values[index] * 1.5
             // }))
-            // const randomColors = Array.from({ length: 97 }, () => `#${Math.floor(Math.random() * 16777215).toString(16)}`);
-
+            //
             // console.log(bubbleData)
 
             setChartData({
@@ -39,7 +38,6 @@ export default function TopicVsRelevance() {
                     label: "Topic VS Relevance",
                     data: rawData.map(data => data.relevance),
                     // data: rawData.map(data => data.value)
-                    // backgroundColor: randomColors
                 }]
 
             })

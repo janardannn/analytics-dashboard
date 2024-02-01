@@ -6,8 +6,11 @@ import Card from './Components/Card';
 import TopicVsLikelihood from './Components/TopicVsLikelihood';
 import TopicVsRelevance from './Components/TopicVsRelevance';
 import SectorVsIntensity from './Components/SectorVsIntensity';
+import RegionVsSector from './Components/RegionVsSector';
 
 export const API_URL = import.meta.env.VITE_API_BASE_URL;
+
+export const randomColors = Array.from({ length: 97 }, () => { let c; do { c = `#${(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0')}` } while ((parseInt(c.substr(1, 2), 16) * 299 + parseInt(c.substr(3, 2), 16) * 587 + parseInt(c.substr(5, 2), 16) * 114) / 1000 < 50); return c; })
 
 function App() {
 
@@ -29,19 +32,15 @@ function App() {
 
   return (
     <>
-      <h1 className='text-2xl text-center mb-[5rem]'>Data Overview Dashbard</h1>
-      `<div className='md:flex sm:block md:justify-between md:p-[2rem] sm:p-[0.7rem]'>
+      <h1 className='text-2xl text-center mb-[1.5rem]'>Data Overview Dashbard</h1>
+      `<div className='md:flex sm:block md:justify-between md:p-[1.5rem] sm:p-[0.7rem] md:my-[1.2rem] sm:my-[0.7rem]'>
         <Card title={"Topic VS Likelihood"} Chart={TopicVsLikelihood} />
         <Card title={"Topic VS Relevance"} Chart={TopicVsRelevance} />
       </div>
 
-      <div className='md:flex sm:block md:justify-between md:p-[2rem] sm:p-[0.7rem]'>
+      <div className='md:flex sm:block md:justify-between md:p-[1.5rem] sm:p-[0.7rem] md:my-[1.2rem] sm:my-[0.7rem]'>
         <Card title={"Sector VS Intensity"} Chart={SectorVsIntensity} />
-
-        {/* <div className='md:w-[600px] md:h-[450] md:ml-[3rem] sm:w-[300px] sm:mr-[1rem]'>
-          <p className='text-xl'>Topic VS Relevance</p>
-          <TopicVsRelevance />
-        </div> */}
+        <Card title={"Region VS Sector"} Chart={RegionVsSector} />
       </div>
     </>
   )

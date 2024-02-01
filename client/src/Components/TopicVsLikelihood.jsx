@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react"
 import { Bar, Bubble, Line } from "react-chartjs-2"
 import { API_URL } from "../App";
+import { randomColors } from "../App";
 import Chart from "chart.js/auto"
 
 export default function TopicVsLikelihood() {
@@ -29,7 +30,6 @@ export default function TopicVsLikelihood() {
             //     y: values[index],
             //     r: values[index] * 1.5
             // }))
-            const randomColors = Array.from({ length: 97 }, () => { let c; do { c = `#${(Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0')}` } while ((parseInt(c.substr(1, 2), 16) * 299 + parseInt(c.substr(3, 2), 16) * 587 + parseInt(c.substr(5, 2), 16) * 114) / 1000 < 50); return c; })
 
             // console.log(bubbleData)
 

@@ -85,15 +85,15 @@ def country_vs_intensity_data():
 
 
 def x_vs_y(x,y):
-    country_vs_sector = {}
+    x_vs_y = {}
     for k in data:
-        if k[x] != "" and k[x] not in country_vs_sector.keys() and k[y] != "":
-            country_vs_sector[k[x]] = []
-            country_vs_sector[k[x]].append(k[y])
+        if k[x] != "" and k[x] not in x_vs_y.keys() and k[y] != "":
+            x_vs_y[k[x]] = []
+            x_vs_y[k[x]].append(k[y])
         elif k[x] != "" and (k[y] != "" and k[y]!=None):
-            country_vs_sector[k[x]].append(k[y])
+            x_vs_y[k[x]].append(k[y])
     
-    return country_vs_sector
+    return x_vs_y
 
 def country_vs_topic_data():
     country_vs_topic = x_vs_y("country", "topic")
