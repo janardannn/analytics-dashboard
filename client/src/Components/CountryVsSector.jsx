@@ -15,10 +15,11 @@ export default function CountryVsSector() {
 
     useEffect(() => {
         const fetchData = async () => {
+
             const data = await axios.get(API_URL + "/countryvssector", {
                 headers: { 'Content-Type': 'application/json' }
             })
-            // console.log(data.data)
+
             setRawData(data.data);
         }
         fetchData()
@@ -26,9 +27,8 @@ export default function CountryVsSector() {
 
     useEffect(() => {
         if (rawData) {
-            // console.log()
+
             setSelectOptions(rawData.map(data => data.country).map(data => ({ label: data, value: data })))
-            // console.log(rawData.map(data => data.country).map(data => ({ label: data, value: data }))[0])
             setCurrent(rawData.map(data => data.country).map(data => ({ label: data, value: data }))[0])
         }
 
@@ -39,15 +39,11 @@ export default function CountryVsSector() {
 
             const data = rawData.filter(data => data.country === current.value)[0].data
 
-            // // console.log(rawData.map(data => data.sector))
-            // console.log(data.map(d => d.value))
-
             setChartData({
                 labels: data.map(x => x.sector),
                 datasets: [{
-                    label: "Region VS Sectors",
+                    label: "Country VS Sectors",
                     data: data.map(y => y.value),
-                    // data: rawData.map(data => data.value)
                     backgroundColor: randomColors
                 }]
 

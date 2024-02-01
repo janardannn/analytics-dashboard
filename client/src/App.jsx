@@ -11,6 +11,7 @@ import RegionVsSector from './Components/RegionVsSector';
 import CountryVsTopic from './Components/CountryVsTopic';
 import CountryVsIntensity from './Components/CountryVsIntensity';
 import CountryVsSector from './Components/CountryVsSector';
+import AllData from './Components/AllData';
 
 export const API_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -66,6 +67,8 @@ function App() {
         title1={"Country VS Topics"} Chart1={CountryVsTopic}
         title2={"Country VS Sector"} Chart2={CountryVsSector}
       />
+
+      <AllData itemsPerPage={10} />
     </div>
   )
 }
