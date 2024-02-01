@@ -3,10 +3,10 @@ import axios from "axios"
 import Select from "react-select"
 import { API_URL } from "../App"
 import { randomColors } from "../App"
-import { Pie } from "react-chartjs-2"
+import { Doughnut } from "react-chartjs-2"
 import Chart from "chart.js/auto"
 
-export default function CountryVsTopic() {
+export default function CountryVsSector() {
     const [rawData, setRawData] = useState();
     const [chartData, setChartData] = useState();
 
@@ -15,7 +15,7 @@ export default function CountryVsTopic() {
 
     useEffect(() => {
         const fetchData = async () => {
-            const data = await axios.get(API_URL + "/countryvstopic", {
+            const data = await axios.get(API_URL + "/countryvssector", {
                 headers: { 'Content-Type': 'application/json' }
             })
             // console.log(data.data)
@@ -28,7 +28,7 @@ export default function CountryVsTopic() {
         if (rawData) {
             // console.log()
             setSelectOptions(rawData.map(data => data.country).map(data => ({ label: data, value: data })))
-            // console.log(rawData.map(data => data.region).map(data => ({ label: data, value: data }))[0])
+            // console.log(rawData.map(data => data.country).map(data => ({ label: data, value: data }))[0])
             setCurrent(rawData.map(data => data.country).map(data => ({ label: data, value: data }))[0])
         }
 
@@ -40,12 +40,12 @@ export default function CountryVsTopic() {
             const data = rawData.filter(data => data.country === current.value)[0].data
 
             // // console.log(rawData.map(data => data.sector))
-            // console.log(data.map(d => d.intensity))
+            // console.log(data.map(d => d.value))
 
             setChartData({
-                labels: data.map(x => x.topic),
+                labels: data.map(x => x.sector),
                 datasets: [{
-                    label: "Country VS Topics",
+                    label: "Region VS Sectors",
                     data: data.map(y => y.value),
                     // data: rawData.map(data => data.value)
                     backgroundColor: randomColors
@@ -63,7 +63,7 @@ export default function CountryVsTopic() {
     return (
         <div>
             <Select options={selectOptions} value={current} onChange={handleSelectorChange} />
-            {chartData ? <Pie data={chartData} /> : <div />}
+            {chartData ? <Doughnut data={chartData} /> : <div />}
         </div>
     )
 }

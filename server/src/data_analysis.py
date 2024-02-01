@@ -35,7 +35,7 @@ sector_vs_intensity_data()
 def country_vs_intensity_data():
 
     country_vs_intensity = x_vs_intensity("country")
-    country_intensity_avg = {}
+    country_intensity_avg = []
 
     for i in country_vs_intensity.keys():
         intensity_len = (len(country_vs_intensity[i]))
@@ -44,7 +44,10 @@ def country_vs_intensity_data():
         avg = intensity_sum/intensity_len
         avg = ("{:.2f}".format(avg))
 
-        country_intensity_avg[i] = avg
+        country_intensity_avg.append({
+            "country": i,
+            "intensity" : avg
+        }) 
 
     return country_intensity_avg
 
@@ -98,15 +101,25 @@ def x_vs_y(x,y):
 def country_vs_topic_data():
     country_vs_topic = x_vs_y("country", "topic")
     
-    country_vs_topic_freq = {}
+    country_vs_topic_final = []
     
     for i in country_vs_topic.keys():
-        if i not in country_vs_topic_freq.keys():
-            country_vs_topic_freq[i] = dict(Counter(country_vs_topic[i]))
-        else:
-            country_vs_topic_freq[i] = dict(Counter(country_vs_topic[i]))
+        temp = []
+        temp_dict = dict(Counter(country_vs_topic[i]))
+        # print(temp_dict)
+        for k in temp_dict.keys():
+            temp.append({
+                "topic": k,
+                "value": temp_dict[k]
+            })
+        country_vs_topic_final.append({
+            "country": i,
+            "data": temp
+        })
 
-    return country_vs_topic_freq
+    return country_vs_topic_final
+
+# country_vs_topic_data()
 
 def region_vs_sector_data():
     region_vs_sector = x_vs_y("region", "sector")
@@ -141,6 +154,25 @@ def region_vs_sector_data():
     return region_vs_sector_final
 
 # print(region_vs_sector_data()[0]['data'])
+def country_vs_sector_data():
+    country_vs_sector = x_vs_y("country", "sector")
+    country_vs_sector_final = []
+
+    for i in country_vs_sector.keys():
+        temp = []
+        temp_dict = dict(Counter(country_vs_sector[i]))
+        for k in temp_dict.keys():
+            temp.append({
+                "sector": k,
+                "value": temp_dict[k]
+            })
+        country_vs_sector_final.append({
+            "country": i,
+            "data": temp
+        })
+    return country_vs_sector_final
+
+# print(country_vs_sector_data())
 
 
 def topic_vs_relevance_data():

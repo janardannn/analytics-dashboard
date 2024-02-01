@@ -3,7 +3,7 @@ import axios from "axios"
 import Select from "react-select"
 import { API_URL } from "../App"
 import { randomColors } from "../App"
-import { Pie, PolarArea } from "react-chartjs-2"
+import { Pie } from "react-chartjs-2"
 import Chart from "chart.js/auto"
 
 export default function RegionVsSector() {
@@ -45,7 +45,7 @@ export default function RegionVsSector() {
             setChartData({
                 labels: data.map(x => x.sector),
                 datasets: [{
-                    label: "Region VS Sector vs Intensity",
+                    label: "Region VS Sectors",
                     data: data.map(y => y.intensity),
                     // data: rawData.map(data => data.value)
                     backgroundColor: randomColors

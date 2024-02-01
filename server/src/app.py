@@ -27,6 +27,16 @@ def sector_vs_intensity():
 def region_vs_sector():
     return(data_analysis.region_vs_sector_data())
 
+@app.route('/countryvstopic', methods=['GET'])
+def coutnry_vs_topic():
+    return data_analysis.country_vs_topic_data()
 
+@app.route('/countryvsintensity', methods=['GET'])
+def country_vs_intensity():
+    return data_analysis.country_vs_intensity_data()
+
+@app.route('/countryvssector', methods=['GET'])
+def country_vs_sector():
+    return data_analysis.country_vs_sector_data()
 
 app.run()
