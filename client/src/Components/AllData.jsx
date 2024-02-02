@@ -6,15 +6,11 @@ import { API_URL } from "../App"
 import Row from "./Row";
 import ColumnName from "./ColumnName";
 import MakeTable from "./MakeTable";
+import Filters from "./Filters";
 
 export default function AllData({ itemsPerPage }) {
     const [rawData, setRawData] = useState();
-
-    const [rowItems, setRowItems] = useState([])
-    const [itemOffset, setItemOffset] = useState(0)
-    const endOffset = itemOffset + itemsPerPage;
-
-    let currentItems, pageCount;
+    const [filteredData, setFilteredData] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -27,19 +23,17 @@ export default function AllData({ itemsPerPage }) {
         fetchData()
     }, [])
 
-    if (rawData) {
-        currentItems = rawData.slice(itemOffset, endOffset)
-        pageCount = Math.ceil(rawData.length / itemsPerPage);
-    }
-
-    // console.log(currentItems)
-    const handlePageClick = (e) => {
-        const newOffset = (e.selected * itemsPerPage) % itemsPerPage.length
-        setItemOffset(newOffset)
-    }
-
     return (
-        rawData ? <MakeTable data={rawData} /> : <></>
+        <>
+            <Filters data={rawData} setFilteredData={setFilteredData} />
+            {/* {rawData ? <MakeTable data={rawData} /> : <></>} */}
+            {
+                rawData ?
+                    (filteredData.length > 0 ? <MakeTable data={filteredData} /> : <MakeTable data={rawData} />)
+                    :
+                    <></>
+            }
+        </>
     )
 
 }

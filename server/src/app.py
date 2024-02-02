@@ -39,4 +39,28 @@ def country_vs_intensity():
 def country_vs_sector():
     return data_analysis.country_vs_sector_data()
 
+@app.route('/filter_by_topics', methods=['GET'])
+def filter_topics():
+    return data_analysis.filter_by('topic')
+
+@app.route('/filter_by_sector', methods=['GET'])
+def filter_sectors():
+    return data_analysis.filter_by('sector')
+
+@app.route('/filter_by_region', methods=['GET'])
+def filter_regions():
+    return data_analysis.filter_by('region')
+
+@app.route('/filter_by_pestle', methods=['GET'])
+def filter_pestle():
+    return data_analysis.filter_by('pestle')
+
+@app.route('/filter_by_source', methods=['GET'])
+def filter_source():
+    return data_analysis.filter_by('source')
+
+@app.route('/filter_by_country', methods=['GET'])
+def filter_country():
+    return data_analysis.filter_by('country')
+
 app.run()

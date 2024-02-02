@@ -216,7 +216,17 @@ def topic_vs_likelihood_data():
 
     return ( topic_vs_likelihood_final)
 
-topic_vs_likelihood_data()
+# topic_vs_likelihood_data()
 
 # print(region_vs_sector_data())
 # print(topic_vs_likelihood_data())
+
+
+def filter_by(arg):
+    data_array = []
+    for k in data:
+        if k[arg]!="" and k[arg] not in data_array:
+            data_array.append(k[arg])
+        else:
+            pass
+    return data_array

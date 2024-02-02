@@ -21,10 +21,6 @@ export default function MakeTable({ data }) {
             accessor: "region"
         },
         {
-            Header: "Start Year",
-            accessor: "start_year"
-        },
-        {
             Header: "End Year",
             accessor: "end_year"
         },
@@ -43,6 +39,10 @@ export default function MakeTable({ data }) {
         {
             Header: "Relevance",
             accessor: "relevance"
+        },
+        {
+            Header: "Source",
+            accessor: "source"
         },
         {
             Header: "URL",

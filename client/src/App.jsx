@@ -37,7 +37,7 @@ function App() {
 
   return (
     <div className='w-full md:p-[5.25rem] md:pt-[4.125rem]'>
-      <h1 className='text-2xl text-center mb-[1.5rem]'>Data Overview Dashbard</h1>
+      <h1 className='text-2xl text-center mb-[1.5rem]'>Visualization Dashboard</h1>
       {/* <div className='md:flex sm:block md:justify-around md:p-[1.5rem] sm:p-[0.7rem] md:my-[1.15rem] sm:my-[0.65rem]'>
         <Card title={"Topic VS Likelihood"} Chart={TopicVsLikelihood} />
         <Card title={"Topic VS Relevance"} Chart={TopicVsRelevance} />
