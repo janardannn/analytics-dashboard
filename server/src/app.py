@@ -66,3 +66,5 @@ def filter_country():
     return data_analysis.filter_by('country')
 
 app.run()
+
+# Python 3.10.12 (main, Nov 20 2023, 15:14:05) [GCC 11.4.0] on linux
