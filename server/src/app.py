@@ -1,10 +1,12 @@
 from get_data_from_db import data
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+import logging
 
 import data_analysis
 
 app = Flask(__name__)
+logging.basicConfig(filename='LOGFILE.log', level=logging.DEBUG)
 CORS(app)
 
 @app.route('/', methods=['GET'])

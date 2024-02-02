@@ -54,12 +54,12 @@ export default function MakeTable({ data }) {
 
     return (
         <div className="px-[5.125rem] text-center">
-            <table {...getTableProps()} className="w-full">
+            <table {...getTableProps()} className="w-full border border-gray-900">
                 <thead>
                     {headerGroups.map(hg => (
                         <tr {...hg.getHeaderGroupProps()}>
                             {hg.headers.map(column => (
-                                <th {...column.getHeaderProps()}>
+                                <th {...column.getHeaderProps()} className="border border-gray-900">
                                     {column.render("Header")}
                                 </th>
                             ))}
@@ -72,9 +72,9 @@ export default function MakeTable({ data }) {
                         return (
                             <tr {...row.getRowProps()}>
                                 {row.cells.map(cell => (
-                                    <td {...cell.getCellProps()}>
+                                    <td {...cell.getCellProps()} className="border border-gray-500">
                                         {cell.column.id === 'url' ? (
-                                            <a href={cell.value} target="_blank" rel="noopener noreferrer">URL</a>
+                                            <a href={cell.value} target="_blank" rel="noopener noreferrer" className="text-blue-700">URL</a>
                                         ) : (
                                             // Render other cell contents normally
                                             cell.render('Cell')
