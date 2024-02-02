@@ -81,7 +81,7 @@ export default function Filters({ data, setFilteredData }) {
                 {current.value === "region" ? <Region handleRegions={handleRegions} selected={regions} setSelected={setRegions} /> : <></>}
                 {current.value === "pestle" ? <Pestle handlePestle={handlePestle} selected={pestles} setSelected={setPestles} /> : <></>}
                 {current.value === "source" ? <Source handleSource={handleSource} selected={sources} setSelected={setSources} /> : <></>}
-                {current.value === "pestle" ? <Country handleCountry={handleCountry} selected={countries} setSelected={setCountries} /> : <></>}
+                {current.value === "country" ? <Country handleCountry={handleCountry} selected={countries} setSelected={setCountries} /> : <></>}
             </div>
         </div>
     )
